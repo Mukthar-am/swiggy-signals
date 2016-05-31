@@ -1,4 +1,4 @@
-package com.swiggy.supply.entities;
+package com.swiggy.supply.supplyentities;
 
 import java.util.HashMap;
 
@@ -7,12 +7,10 @@ import java.util.HashMap;
  *
  *  Main course, non-veg type of details.
  */
-public class NonVegMainCourse {
-    HashMap<String, Double> Biryani = new HashMap<String, Double>() {{
+public class MainCourseNonVeg {
+    public HashMap<String, Double> Biryani = new HashMap<String, Double>() {{
         put("Mutton Biryani",120.00);
         put("Chicken Biryani",100.00);
         put("Egg Biryani",90.00);
     }};
-
-
 }

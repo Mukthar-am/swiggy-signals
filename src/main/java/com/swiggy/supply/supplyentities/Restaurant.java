@@ -1,4 +1,6 @@
-package com.swiggy.supply.entities;
+package com.swiggy.supply.supplyentities;
+
+import com.swiggy.commons.Address;
 
 /**
  * Created by mukthar.ahmed on 5/31/16.
@@ -10,7 +12,7 @@ public interface Restaurant {
 
     public Menu getMenu();
 
-    public RestaurantAddress getResturantAddress();
+    public Address getResturantAddress();
 
-    public RestaurantCatagory getCatagory(int id);
+    public RestaurantCatagoryMap getCatagory();
 }
