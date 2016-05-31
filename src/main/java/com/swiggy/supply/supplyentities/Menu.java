@@ -18,7 +18,6 @@ public class Menu {
     public void setMainCourseVeg(MainCourseVeg vegCourse) {
         this.mainCourseVeg = vegCourse;
     }
-
     public void setStartersVeg(StartersVeg vegStarters) {
         this.startersVeg = vegStarters;
     }
