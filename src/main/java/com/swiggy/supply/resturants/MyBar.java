@@ -1,5 +1,6 @@
 package com.swiggy.supply.resturants;
 
+import com.swiggy.commons.Address;
 import com.swiggy.supply.supplyentities.*;
 
 /**
@@ -46,4 +47,12 @@ public class MyBar implements Restaurant {
     public Menu getMenu() { return this.MENU; }
     public Address getResturantAddress() { return this.ADDRESS; }
     public RestaurantCatagoryMap getCatagory() { return this.CATAGORY; }
+
+    public int itemAvailability(String itemName) {
+        return 0;
+    }
+
+    public PlaceOrderStatus prepareOrder(Integer orderId, String item, int itemCount, boolean testingTagBusy) {
+        return null;
+    }
 }

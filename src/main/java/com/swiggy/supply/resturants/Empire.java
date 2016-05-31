@@ -17,6 +17,8 @@ public class Empire implements Restaurant {
         "560061", "JP Nagar", "Bangalore", "Karnataka", "India", "IN"
     );
 
+    public Empire() {}
+
     private RestaurantCatagoryMap CATAGORY;
 
     public String getName() {
@@ -57,6 +59,13 @@ public class Empire implements Restaurant {
     /** Items in stock */
     public HashMap<String, Integer> itemsInStock() {
         final String muttonBiryani = "Mutton Biryani";
+
+        /**
+         * Note: We can use a BlockingQueue here instead of HashMap so that the orders tracking
+         * and First Come, First Served is applied here.
+         *
+         * Using hashmap for simplicity
+         */
         HashMap<String, Integer> itemsAvailabe = new HashMap<String, Integer>() {{
             put(muttonBiryani.toLowerCase(), 3);
 
@@ -67,9 +76,9 @@ public class Empire implements Restaurant {
 
 
     /** Get the count of the items available so that orders can be served in a queue */
-    public int isItemAvailable(String itemName) {
+    public int itemAvailability(String itemName) {
         if ( itemsInStock().containsKey( itemName.toLowerCase() ) ) {
-            int totalStock = itemsInStock().get(itemName.toLowerCase();
+            int totalStock = itemsInStock().get(itemName.toLowerCase());
             if ( totalStock >= 1) {
                 return totalStock;
             }
@@ -77,21 +86,47 @@ public class Empire implements Restaurant {
         return -1;
     }
 
+    public PlaceOrderStatus prepareOrder(Integer orderId, String item, int itemCount, boolean testingTagBusy) {
+        int availabilityCount = itemAvailability(item);
 
-    public enum status {
-        BUSY(1),
-        ACCEPTED(2),
-        OUT_OF_STOCK(3);
+        /** Place an order only if the item count requested is >= total available */
+        if (availabilityCount >= itemCount) {
 
+            if (testingTagBusy) {
+                return PlaceOrderStatus.BUSY;
+            }
 
-        private final int levelCode;
+            int available = itemsInStock().get(item);
+            this.itemsInStock().put(item, available - itemCount);
 
-        status(int levelCode) {
-            this.levelCode = levelCode;
+            try {
+                Thread.sleep(10000);
+                DeliverOrder.readyToDeliver(orderId);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (availabilityCount < itemCount ) {
+            return PlaceOrderStatus.OUT_OF_STOCK;
+
         }
 
-        public int getLevelCode() {
-            return this.levelCode;
-        }
+        return PlaceOrderStatus.ACCEPTED;
     }
+
+//    public enum PlaceOrderStatus {
+//        BUSY(1),
+//        ACCEPTED(2),
+//        OUT_OF_STOCK(3);
+//
+//        private final int levelCode;
+//
+//        PlaceOrderStatus(int levelCode) {
+//            this.levelCode = levelCode;
+//        }
+//
+//        public int getLevelCode() {
+//            return this.levelCode;
+//        }
+//    }
 }
