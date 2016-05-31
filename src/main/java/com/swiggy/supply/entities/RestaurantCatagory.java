@@ -1,23 +1,23 @@
-package com.swiggy.signals.Resturants;
+package com.swiggy.supply.entities;
 
 /**
  * Created by mukthar.ahmed on 5/31/16.
  *
  *  Enum class for resturant types
  */
-public enum ResturantCatagory {
+public enum RestaurantCatagory {
     PURE_VEG(0),
     VEG_AND_NONVEG(1),
     BAR_AND_RESTURANT(3);
 
     private int col;
 
-    ResturantCatagory(int col) {
+    RestaurantCatagory(int col) {
         this.col = col;
     }
 
-    public static ResturantCatagory findByValue(int col) {
-        for (ResturantCatagory mapping : ResturantCatagory.values()) {
+    public RestaurantCatagory findByValue(int col) {
+        for (RestaurantCatagory mapping : RestaurantCatagory.values()) {
             if (mapping.col == col) {
                 return mapping;
             }

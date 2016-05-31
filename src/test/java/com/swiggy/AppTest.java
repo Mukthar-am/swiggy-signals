@@ -1,4 +1,4 @@
-package com.swiggy.signals;
+package com.swiggy;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
